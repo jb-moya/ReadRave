@@ -1,0 +1,34 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        /* set here independent colors */
+        --s-color-1: 230 216 189;
+        --s-color-2: 201 115 56;
+        --s-color-3: 165 77 39;
+        --s-color-4: 101 55 31;
+        --s-color-5: 27 27 27;
+    }
+
+    :root[data-theme="light"] {
+        --color-1: 230 216 189;
+        --color-2: 201 115 56;
+        --color-3: 165 77 39;
+        --color-4: 101 55 31;
+        --color-5: 27 27 27;
+    }
+
+    :root[data-theme="dark"] {
+        --color-1: 27 27 27;
+        --color-2: 101 55 31;
+        --color-3: 165 77 39;
+        --color-4: 201 115 56;
+        --color-5: 230 216 189;
+    }
+}
+
+body {
+    background: rgb(var(--color-1));
+}
