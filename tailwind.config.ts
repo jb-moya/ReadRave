@@ -23,6 +23,23 @@ const config: Config = {
                     "color-5": "rgb(var(--color-5) / <alpha-value>)",
                 },
             },
+            transitionTimingFunction: {
+                elegant: "cubic-bezier(1, 0, 0, 1)",
+            },
+            keyframes: {
+                "custom-enter": {
+                    "0%": { opacity: "0", transform: "translateY(-50%)" },
+                    "100%": { opacity: "1", transform: "translateY(0)" },
+                },
+                "custom-exit": {
+                    "0%": { opacity: "1", transform: "translateY(0)" },
+                    "100%": { opacity: "0", transform: "translateY(-50%)" },
+                },
+            },
+            animation: {
+                "custom-enter": "custom-enter .5s elegant",
+                "custom-exit": "custom-exit .5s elegant",
+            },
         },
     },
     plugins: [

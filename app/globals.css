@@ -2,9 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+
 @layer base {
     :root {
         /* set here independent colors */
+        --color-number: #cc0101;
+        
         --s-color-1: 230 216 189;
         --s-color-2: 201 115 56;
         --s-color-3: 165 77 39;
@@ -32,3 +35,7 @@
 body {
     background: rgb(var(--color-1));
 }
+
+
+
+

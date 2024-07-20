@@ -6,8 +6,8 @@ import ToggleTheme from "../components/ToggleTheme";
 
 export default function Home() {
     return (
-        <div className="flex min-h-screen flex-col items-center justify-center py-2">
-            <div className="flex flex-row items-center mb-4">
+        <div className="flex w-[300px] mx-auto min-h-screen flex-col items-center justify-center py-2">
+            <div className="flex flex-row items-center justify-between mb-4 w-full">
                 <h1 className="text-5xl">
                     <span className={"font-thin text-custom-color-5"}>
                         read
