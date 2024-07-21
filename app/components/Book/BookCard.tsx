@@ -27,8 +27,8 @@ export default function BookCard({
     const randomRatingCount = Math.floor(Math.random() * 20_000);
 
     return (
-        <div className="group w-full flex gap-1 mt-2">
-            <div className="m-2 bg-custom-color-4 min-w-[120px] min-h-[180px] sm:min-w-[150px] sm:min-h-[225px] relative shadow-2xl group hover:scale-105 transition-transform duration-500 ease-elegant cursor-pointer">
+        <div className="group w-full flex gap-1 mt-4 text-custom-color-5 border border-custom-color-5/25">
+            <div className="bg-custom-color-4 min-w-[120px] min-h-[180px] sm:min-w-[150px] sm:min-h-[225px] relative shadow-2xl group hover:scale-105 transition-transform duration-500 ease-elegant cursor-pointer">
                 {image ? (
                     <Image
                         src={image}
@@ -39,16 +39,16 @@ export default function BookCard({
                         sizes="100vw"
                     />
                 ) : (
-                    <div className="w-full h-full  flex items-center justify-center text-custom-color-5">
+                    <div className="w-full h-full flex items-center justify-center">
                         {title}
                     </div>
                 )}
             </div>
             <div className="m-2 w-full ">
                 <div
-                    className={`${merriweather.className} border-b-[1px] border-custom-color-5 border-opacity-15 cursor-pointer line-clamp-2 text-lg `}
+                    className={`${merriweather.className} border-b-[1px] border-custom-color-5 border-opacity-15 cursor-pointer line-clamp-2`}
                 >
-                    <div className="group-hover:text-custom-color-2">
+                    <div className="group-hover:text-custom-static-2 text-xl">
                         <span>{title}</span>
                         {subtitle && (
                             <>
@@ -58,13 +58,11 @@ export default function BookCard({
                             </>
                         )}
                     </div>
-                    <div className="text-sm line-clamp-1 mt-1">
+                    <div className="text-sm line-clamp-1 mt-1 text-custom-static-2">
+                        <span className="text-custom-color-5">by </span>
                         {authors?.map((author, index) => (
-                            <span
-                                key={author}
-                                className="text-custom-color-5 text-opacity-50"
-                            >
-                                by {author}
+                            <span key={author}>
+                                <span>{author}</span>
                                 {index < authors.length - 1 && " • "}
                             </span>
                         ))}
@@ -73,25 +71,22 @@ export default function BookCard({
 
                 <div className="text-sm mt-1 line-clamp-1">
                     {categories?.map((category) => (
-                        <span
-                            key={category}
-                            className="text-custom-color-5 text-opacity-50"
-                        >
+                        <span key={category} className=" opacity-80">
                             {category}
                         </span>
                     ))}
                 </div>
 
                 <div className="flex text-sm items-center gap-1">
-                    <BsStarFill className="text-custom-color-2" />
+                    <BsStarFill className="text-custom-static-2" />
                     {randomStarRating.toFixed(2)}
-                    <span className="text-custom-color-5 text-opacity-50">
+                    <span className=" opacity-80">
                         ({formatNumber(randomRatingCount)})
                     </span>
                     {publishedDate && (
                         <>
                             <span className="opacity-35">•</span>
-                            <span className="text-custom-color-5 text-opacity-50">
+                            <span className=" opacity-80">
                                 {new Date(publishedDate).getFullYear()}
                             </span>
                         </>
@@ -99,7 +94,7 @@ export default function BookCard({
                     {pageCount && (
                         <>
                             <span className="opacity-35">•</span>
-                            <span className="text-custom-color-5 text-opacity-50">
+                            <span className=" opacity-80">
                                 {formatNumber(pageCount)} pages
                             </span>
                         </>
