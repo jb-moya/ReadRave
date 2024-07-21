@@ -9,8 +9,15 @@ interface Book {
     id: string;
     volumeInfo: {
         title: string;
+        subtitle?: string;
         authors?: string[];
+        categories?: string[];
         publishedDate?: string;
+        pageCount?: number;
+        imageLinks?: {
+            thumbnail?: string;
+            smallThumbnail?: string;
+        };
     };
 }
 
@@ -52,74 +59,25 @@ const Users = () => {
                     {loading ? "Searching..." : "Search"}
                 </button>
                 {error && <p style={{ color: "red" }}>{error}</p>}
-                <div className="flex flex-wrap justify-center gap-7">
-                    {books.map((book) => (
-                        <BookCard
-                            key={book.id}
-                            title={book.volumeInfo.title}
-                            authors={book.volumeInfo.authors}
-                        />
-                    ))}
+                <div className="w-full">
+                    {books.map((book) => {
+                        const imageSrc =
+                            book.volumeInfo.imageLinks?.thumbnail ||
+                            book.volumeInfo.imageLinks?.smallThumbnail;
 
-                    {/*  mote: error: GH013: Repository rule violations found for refs/heads/main.        
-remote: 
-remote: - GITHUB PUSH PROTECTION        
-remote:   —————————————————————————————————————————        
-remote:     Resolve the following violations before pushing again        
-remote: 
-remote:     - Push cannot contain secrets        
-remote: */}
-
-                    <BookCard
-                        key={"fasdf"}
-                        title={"Maybe you should read this"}
-                        authors={["JB Moya"]}
-                    />
-                    <BookCard
-                        key={"fasdf"}
-                        title={"Maybe you should read this"}
-                        authors={["JB Moya"]}
-                    />
-                    <BookCard
-                        key={"fasdf"}
-                        title={"Maybe you should read this"}
-                        authors={["JB Moya"]}
-                    />
-                    <BookCard
-                        key={"fasdf"}
-                        title={"Maybe you should read this"}
-                        authors={["JB Moya"]}
-                    />
-                    <BookCard
-                        key={"fasdf"}
-                        title={"Maybe you should read this"}
-                        authors={["JB Moya"]}
-                    />
-                    <BookCard
-                        key={"fasdf"}
-                        title={"Maybe you should read this"}
-                        authors={["JB Moya"]}
-                    />
-                    <BookCard
-                        key={"fasdf"}
-                        title={"Maybe you should read this"}
-                        authors={["JB Moya"]}
-                    />
-                    <BookCard
-                        key={"fasdf"}
-                        title={"Maybe you should read this"}
-                        authors={["JB Moya"]}
-                    />
-                    <BookCard
-                        key={"fasdf"}
-                        title={"Maybe you should read this"}
-                        authors={["JB Moya"]}
-                    />
-                    <BookCard
-                        key={"fasdf"}
-                        title={"Maybe you should read this"}
-                        authors={["JB Moya"]}
-                    />
+                        return (
+                            <BookCard
+                                key={book.id}
+                                title={book.volumeInfo.title}
+                                subtitle={book.volumeInfo.subtitle}
+                                authors={book.volumeInfo.authors}
+                                categories={book.volumeInfo.categories}
+                                publishedDate={book.volumeInfo.publishedDate}
+                                pageCount={book.volumeInfo.pageCount}
+                                image={imageSrc || ""}
+                            />
+                        );
+                    })}
                 </div>
             </div>
         </>
