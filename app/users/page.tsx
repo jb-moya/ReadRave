@@ -61,57 +61,65 @@ const Users = () => {
                         />
                     ))}
 
-                    <BookCard
-                        key={"fasdf"}
-                        title={"Maybe you should read this"}
-                        authors={["JB Moya"]}
-                    />
-                    <BookCard
-                        key={"fasdf"}
-                        title={"Maybe you should read this"}
-                        authors={["JB Moya"]}
-                    />
-                    <BookCard
-                        key={"fasdf"}
-                        title={"Maybe you should read this"}
-                        authors={["JB Moya"]}
-                    />
-                    <BookCard
-                        key={"fasdf"}
-                        title={"Maybe you should read this"}
-                        authors={["JB Moya"]}
-                    />
-                    <BookCard
-                        key={"fasdf"}
-                        title={"Maybe you should read this"}
-                        authors={["JB Moya"]}
-                    />
-                    <BookCard
-                        key={"fasdf"}
-                        title={"Maybe you should read this"}
-                        authors={["JB Moya"]}
-                    />
-                    <BookCard
-                        key={"fasdf"}
-                        title={"Maybe you should read this"}
-                        authors={["JB Moya"]}
-                    />
-                    <BookCard
-                        key={"fasdf"}
-                        title={"Maybe you should read this"}
-                        authors={["JB Moya"]}
-                    />
-                    <BookCard
-                        key={"fasdf"}
-                        title={"Maybe you should read this"}
-                        authors={["JB Moya"]}
-                    />
-                    <BookCard
-                        key={"fasdf"}
-                        title={"Maybe you should read this"}
-                        authors={["JB Moya"]}
-                    />
+                    {/*  mote: error: GH013: Repository rule violations found for refs/heads/main.        
+remote: 
+remote: - GITHUB PUSH PROTECTION        
+remote:   —————————————————————————————————————————        
+remote:     Resolve the following violations before pushing again        
+remote: 
+remote:     - Push cannot contain secrets        
+remote: */}
 
+                    <BookCard
+                        key={"fasdf"}
+                        title={"Maybe you should read this"}
+                        authors={["JB Moya"]}
+                    />
+                    <BookCard
+                        key={"fasdf"}
+                        title={"Maybe you should read this"}
+                        authors={["JB Moya"]}
+                    />
+                    <BookCard
+                        key={"fasdf"}
+                        title={"Maybe you should read this"}
+                        authors={["JB Moya"]}
+                    />
+                    <BookCard
+                        key={"fasdf"}
+                        title={"Maybe you should read this"}
+                        authors={["JB Moya"]}
+                    />
+                    <BookCard
+                        key={"fasdf"}
+                        title={"Maybe you should read this"}
+                        authors={["JB Moya"]}
+                    />
+                    <BookCard
+                        key={"fasdf"}
+                        title={"Maybe you should read this"}
+                        authors={["JB Moya"]}
+                    />
+                    <BookCard
+                        key={"fasdf"}
+                        title={"Maybe you should read this"}
+                        authors={["JB Moya"]}
+                    />
+                    <BookCard
+                        key={"fasdf"}
+                        title={"Maybe you should read this"}
+                        authors={["JB Moya"]}
+                    />
+                    <BookCard
+                        key={"fasdf"}
+                        title={"Maybe you should read this"}
+                        authors={["JB Moya"]}
+                    />
+                    <BookCard
+                        key={"fasdf"}
+                        title={"Maybe you should read this"}
+                        authors={["JB Moya"]}
+                    />
                 </div>
             </div>
         </>
