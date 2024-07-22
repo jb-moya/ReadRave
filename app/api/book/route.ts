@@ -1,7 +1,8 @@
 // pages/api/books.ts
 import type { NextApiRequest, NextApiResponse } from "next";
 import { NextResponse } from "next/server";
-
+import * as htmlparser2 from "htmlparser2";
+import { DomHandler } from "domhandler";
 import axios from "axios";
 
 interface GoogleBooksResponse {
@@ -13,6 +14,48 @@ interface GoogleBooksResponse {
             publishedDate?: string;
         };
     }>;
+}
+
+interface ScrapedData {
+    quote: string;
+    author: string;
+    tags: string[];
+}
+
+async function getRedirectedPage(isbn: string): Promise<string[]> {
+    const searchUrl = `https://www.goodreads.com/search?utf8=%E2%9C%93&q=${isbn}&search_type=books`;
+    const startTime = Date.now(); // Capture the start time
+
+    const response = await axios.get(searchUrl);
+
+    const endTime = Date.now(); // Capture the end time
+
+    const responseTime = endTime - startTime; // Calculate the response time
+    console.log(`Response Time: ${responseTime} ms`);
+
+    const prefix = `https://www.goodreads.com/work/quotes`;
+
+    const dom = htmlparser2.parseDocument(response.data);
+    const urls: string[] = [];
+
+    function findUrls(node: any) {
+        if (node.type === "tag" && node.name === "a" && node.attribs.href) {
+            const href = node.attribs.href;
+            if (href.startsWith(prefix)) {
+                urls.push(href);
+            }
+        }
+        if (node.children) {
+            node.children.forEach(findUrls);
+        }
+    }
+
+    // Start searching from the root of the DOM tree
+    findUrls(dom);
+
+    // 9781328662057
+
+    return urls;
 }
 
 export async function GET(request: Request) {
@@ -38,6 +81,9 @@ export async function GET(request: Request) {
             }
         );
 
+        // const html = await getRedirectedPage("9781328662057");
+        // console.log("htmlaaaaaaa, " + html);
+
         return NextResponse.json(response.data);
     } catch (error) {
         console.error(error, "GOOGLE_BOOKS_API_ERROR");
@@ -59,7 +105,7 @@ export async function GET(request: Request) {
 //     }
 
 //     try {
-      
+
 //         const response = await axios.get(
 //             `https://www.googleapis.com/books/v1/volumes?q=${query}&key=${process.env.GOOGLE_BOOKS_API_KEY}`
 //         );
@@ -75,6 +121,6 @@ export async function GET(request: Request) {
 //     }
 // }
 
-  // const response = await axios.get<GoogleBooksResponse>(
-        //     `https://www.googleapis.com/books/v1/volumes?q=${query}&key=${process.env.GOOGLE_BOOKS_API_KEY}`
-        // );
+// const response = await axios.get<GoogleBooksResponse>(
+//     `https://www.googleapis.com/books/v1/volumes?q=${query}&key=${process.env.GOOGLE_BOOKS_API_KEY}`
+// );

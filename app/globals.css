@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+    .dropdown-content {
+        @apply p-0;
+    }
+  .dropdown-content > li {
+    @apply rounded-none;
+    @apply hover:bg-custom-static-5/50;
+  }
+}
 
 @layer base {
     :root {
@@ -32,7 +41,7 @@
     }
 }
 
-body {
+body, :root {
     background: rgb(var(--color-1));
 }
 
