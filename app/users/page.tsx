@@ -7,6 +7,7 @@ import BookCard from "../components/Book/BookCard";
 import { CiSearch } from "react-icons/ci";
 import { merriweather } from "@/fonts";
 import { RiDoubleQuotesL, RiDoubleQuotesR } from "react-icons/ri";
+import Navbar from "../components/Navbar";
 interface Book {
     id: string;
     volumeInfo: {
@@ -69,6 +70,9 @@ const Users = () => {
     return (
         <>
             <div className="min-h-screen">
+                <Navbar />
+
+
                 <div
                     className={`${merriweather.className} my-5 w-fit mx-auto px-2 py-1 relative min-h-24`}
                 >
@@ -114,7 +118,7 @@ const Users = () => {
 
                 {error && <p style={{ color: "red" }}>{error}</p>}
                 <div className="w-full">
-                    {books.map((book) => {
+                    {/* {books.map((book) => {
                         const imageSrc =
                             book.volumeInfo.imageLinks?.thumbnail ||
                             book.volumeInfo.imageLinks?.smallThumbnail;
@@ -131,11 +135,10 @@ const Users = () => {
                                 image={imageSrc || ""}
                             />
                         );
-                    })}
-
+                    })} */}
 
                     {/* example booCard */}
-                    <BookCard
+                    {/* <BookCard
                         title="The Lord of the Rings"
                         subtitle="The Fellowship of the Ring"
                         authors={["J.R.R. Tolkien"]}
@@ -143,7 +146,7 @@ const Users = () => {
                         publishedDate="1954"
                         pageCount={700}
                         image="https://images.unsplash.com/photo-1606813907291-d86efa9b94db?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
-                    />
+                    /> */}
                 </div>
             </div>
         </>

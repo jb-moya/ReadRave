@@ -5,6 +5,9 @@ import GithubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import prisma from "@/lib/prismadb";
+import { Session } from "next-auth";
+import { JWT } from "next-auth/jwt";
+import { AdapterUser } from "next-auth/adapters";
 
 export const authOptions: AuthOptions = {
     adapter: PrismaAdapter(prisma),
@@ -24,7 +27,7 @@ export const authOptions: AuthOptions = {
                 password: { label: "password", type: "password" },
             },
             async authorize(credentials) {
-                console.log("TJLKEJRLEJLKR")
+                console.log("TJLKEJRLEJLKR");
                 if (!credentials?.email || !credentials?.password) {
                     throw new Error("Missing credentials");
                 }
@@ -56,6 +59,31 @@ export const authOptions: AuthOptions = {
     ],
     // pages: {
     //     signIn: "/",
+    // },
+    // callbacks: {
+    //     async session({
+    //         session,
+    //         token,
+    //         user,
+    //     }: {
+    //         session: Session;
+    //         token: JWT;
+    //         user: AdapterUser;
+    //     }) {
+    //         console.log("session", session, token, user);
+    //         // // Fetch user data from the database using the user ID from the session token
+    //         // const dbUser = await prisma.user.findUnique({
+    //         //     where: { email: session.user?.email || undefined },
+    //         // });
+
+    //         // // Add additional user information to the session
+    //         // if (dbUser) {
+    //         //     session.user.id = dbUser.id;
+    //         //     session.user.name = dbUser.name;
+    //         // }
+
+    //         return session;
+    //     },
     // },
     debug: process.env.NODE_ENV === "development",
     session: {

@@ -6,14 +6,12 @@ import { ToasterContext } from "./context/ToasterContext";
 import AuthContext from "./context/AuthContext";
 import Image from "next/image";
 import bgImage from "./assets/bg.jpg";
-import ToggleTheme from "./components/ToggleTheme";
-import { merriweather } from "@/fonts";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
     title: "ReadRave",
-    description: "A Book E-Commerce Web App",
+    description: "A Book Social Media Web App",
 };
 
 export default function RootLayout({
@@ -38,28 +36,6 @@ export default function RootLayout({
                         </div>
 
                         <main className="sm:max-w-4xl max-w-2xl mx-auto relative">
-                            <nav className="p-2 h-fit flex justify-between items-center align-middle content-center text-custom-color-5">
-                                <h1 className="text-5xl">
-                                    <span
-                                        className={
-                                            "font-thin text-custom-static-1"
-                                        }
-                                    >
-                                        read
-                                    </span>
-                                    <span
-                                        className={`${merriweather.className} font-thin text-custom-static-2`}
-                                    >
-                                        rave
-                                    </span>
-                                </h1>
-                                {/* <button onClick={() => signOut()}>Sign out</button> */}
-                                <div className="flex items-center text-custom-static-2">
-                                    <ToggleTheme />
-                                    <div className="rounded-full border border-custom-color-1 bg-custom-static-3 w-8 h-8"></div>
-                                </div>
-                            </nav>
-
                             {children}
                         </main>
                     </StoreProvider>

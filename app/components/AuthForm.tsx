@@ -24,11 +24,11 @@ const AuthForm = () => {
         setAuthType(authType === "LOGIN" ? "SIGNUP" : "LOGIN");
     }, [authType]);
 
-    useEffect(() => {
-        if (session?.status === "authenticated") {
-            router.push("/users");
-        }
-    }, [session?.status, router]);
+    // useEffect(() => {
+    //     if (session?.status === "authenticated") {
+    //         router.push("/users");
+    //     }
+    // }, [session?.status, router]);
 
     const {
         register,
@@ -50,6 +50,7 @@ const AuthForm = () => {
             signIn("credentials", {
                 ...data,
                 redirect: false,
+                callbackUrl: "/users",
             })
                 .then((callback) => {
                     if (callback?.ok && !callback?.error) {
@@ -69,6 +70,7 @@ const AuthForm = () => {
                     signIn("credentials", {
                         ...data,
                         redirect: false,
+                        callbackUrl: "/users",
                     });
                 })
                 .catch((error) => {
@@ -83,7 +85,7 @@ const AuthForm = () => {
     const socialAction = (action: string) => {
         setIsLoading(true);
 
-        signIn(action, { redirect: false })
+        signIn(action, { redirect: false, callbackUrl: "/users" })
             .then((callback) => {
                 if (callback?.error) {
                     toast.error("Invalid credentials");

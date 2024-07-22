@@ -1,3 +1,4 @@
+'use client'
 import React from 'react'
 import {
     BsBookmarkPlus,
@@ -13,13 +14,13 @@ const BookStatusButton = () => {
           <div
               tabIndex={0}
               role="button"
-              className="btn rounded-none hover:bg-custom-color-2 bg-custom-static-2 border-0 text-custom-static-1"
+              className="btn"
           >
               <BsBookmarkPlus /> Want to Read
           </div>
           <ul
               tabIndex={0}
-              className="dropdown-content menu bg-custom-static-2 z-[1] w-52 shadow text-custom-static-1"
+              className="dropdown-content menu"
           >
               <li>
                   <a>

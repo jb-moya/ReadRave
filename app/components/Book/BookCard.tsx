@@ -67,10 +67,12 @@ export default function BookCard({
                     <div className="text-sm line-clamp-1 mt-1 text-custom-static-2">
                         <span className="text-custom-color-5">by </span>
                         {authors?.map((author, index) => (
-                            <span key={author}>
+                            <div key={author}>
                                 <span>{author}</span>
-                                {index < authors.length - 1 && " • "}
-                            </span>
+                                <span>
+                                    {index < authors.length - 1 && " • "}
+                                </span>
+                            </div>
                         ))}
                     </div>
                 </div>
