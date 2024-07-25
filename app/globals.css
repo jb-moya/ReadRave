@@ -12,7 +12,7 @@
     }
 
     .btn {
-        @apply rounded-none hover:text-custom-static-1 hover:bg-custom-color-5 bg-custom-static-2 border-0 text-custom-static-1
+        @apply rounded-none hover:text-custom-static-1 hover:bg-custom-color-5 bg-custom-static-2 border-0 text-custom-static-1;
     }
 }
 
@@ -48,4 +48,11 @@
 body,
 :root {
     background: rgb(var(--color-1));
+    color: rgb(var(--color-5));
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: rgb(var(--color-5));
+    opacity: .65;
 }

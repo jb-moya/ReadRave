@@ -1,3 +1,4 @@
+'use client';
 import Image from "next/image";
 import AuthForm from "../components/AuthForm";
 import clsx from "clsx";

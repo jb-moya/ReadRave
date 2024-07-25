@@ -26,7 +26,7 @@ export default function RootLayout({
                     <StoreProvider>
                         <ToasterContext />
 
-                        <div className="top-0 absolute left-0 bg-transparent opacity-50 pointer-events-none w-screen max-w-full h-72">
+                        <div className="top-0 absolute left-0 bg-transparent opacity-25 pointer-events-none w-screen max-w-full h-72">
                             <Image
                                 src={bgImage}
                                 alt="bg"

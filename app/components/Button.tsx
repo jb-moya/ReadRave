@@ -49,15 +49,15 @@ const Button: React.FC<ButtonProps> = ({
 				bg-none
 
 				before:transition-transform
-				before:duration-500
+				before:duration-300
 				before:ease-elegant
 				
 				after:transition-transform
-				after:duration-500
+				after:duration-300
 				after:ease-elegant
-				after:scale-y-75
+				after:scale-90
 
-				hover:before:scale-y-75
+				hover:before:scale-y-90
 				hover:after:scale-y-110
 
 				group
@@ -81,10 +81,10 @@ const Button: React.FC<ButtonProps> = ({
                     !danger &&
                     "after:border-custom-static-2 before:bg-custom-static-2 text-custom-static-1",
                 secondary &&
-                    "after:border-custom-color-3 before:border before:border-custom-color-2/25 text-custom-static-2"
+                    "after:border-custom-color-3/50 before:border before:border-custom-color-2/50 text-custom-static-2"
             )}
         >
-            <span className="flex items-center gap-1 transition-transform ease-elegant duration-500 relative group-hover:scale-125">
+            <span className="flex items-center gap-1 transition-transform ease-elegant duration-150 relative group-hover:scale-110">
                 {children}
             </span>
         </button>

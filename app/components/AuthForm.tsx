@@ -24,12 +24,6 @@ const AuthForm = () => {
         setAuthType(authType === "LOGIN" ? "SIGNUP" : "LOGIN");
     }, [authType]);
 
-    // useEffect(() => {
-    //     if (session?.status === "authenticated") {
-    //         router.push("/users");
-    //     }
-    // }, [session?.status, router]);
-
     const {
         register,
         handleSubmit,
@@ -37,8 +31,8 @@ const AuthForm = () => {
     } = useForm<FieldValues>({
         defaultValues: {
             name: "asdf",
-            email: "asdf@mail.com",
-            password: "12345555555555555",
+            email: "continue_as_a_guest@mail.com",
+            password: "12345678",
         },
     });
 
@@ -46,11 +40,9 @@ const AuthForm = () => {
         setIsLoading(true);
 
         if (authType === "LOGIN") {
-            // login logic
             signIn("credentials", {
                 ...data,
-                redirect: false,
-                callbackUrl: "/users",
+                callbackUrl: "/home",
             })
                 .then((callback) => {
                     if (callback?.ok && !callback?.error) {
@@ -69,8 +61,7 @@ const AuthForm = () => {
                 .then(() => {
                     signIn("credentials", {
                         ...data,
-                        redirect: false,
-                        callbackUrl: "/users",
+                        callbackUrl: "/home",
                     });
                 })
                 .catch((error) => {
@@ -85,13 +76,13 @@ const AuthForm = () => {
     const socialAction = (action: string) => {
         setIsLoading(true);
 
-        signIn(action, { redirect: false, callbackUrl: "/users" })
+        signIn(action, { redirect: false, callbackUrl: "/home" })
             .then((callback) => {
                 if (callback?.error) {
                     toast.error("Invalid credentials");
                 } else if (callback?.ok && !callback?.error) {
                     toast.success("Logged in");
-                    router.push("/users");
+                    router.push("/home");
                 }
             })
             .finally(() => setIsLoading(false));

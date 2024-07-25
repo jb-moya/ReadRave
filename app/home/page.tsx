@@ -8,36 +8,20 @@ import { CiSearch } from "react-icons/ci";
 import { merriweather } from "@/fonts";
 import { RiDoubleQuotesL, RiDoubleQuotesR } from "react-icons/ri";
 import Navbar from "../components/Navbar";
-interface Book {
-    id: string;
-    volumeInfo: {
-        title: string;
-        subtitle?: string;
-        authors?: string[];
-        categories?: string[];
-        publishedDate?: string;
-        pageCount?: number;
-        imageLinks?: {
-            thumbnail?: string;
-            smallThumbnail?: string;
-        };
-    };
-}
+import { Book, Quote } from "@/interfaces";
+import debounce from "../util/debounce";
 
-interface Quote {
-    q: string;
-    a: string;
-}
-
-const Users = () => {
+const Home = () => {
     const hasQuoteFetched = useRef(false);
-    const [query, setQuery] = useState<string>("");
+    const [query, setQuery] = useState<string>("The song of ice and fire");
     const [books, setBooks] = useState<Book[]>([]);
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string>("");
     const [quote, setQuote] = useState<Quote>({ a: "", q: "" });
 
     const handleSearch = async () => {
+        if (loading) return;
+
         setLoading(true);
         setError("");
         try {
@@ -49,6 +33,8 @@ const Users = () => {
         }
         setLoading(false);
     };
+
+    const debouncedHandleSearch = debounce(handleSearch, 1000);
 
     const getQuote = useCallback(async () => {
         const response = await axios.get("/api/zenquotes");
@@ -69,15 +55,14 @@ const Users = () => {
 
     return (
         <>
-            <div className="min-h-screen">
+            <div className="min-h-screen w-full">
                 <Navbar />
-
 
                 <div
                     className={`${merriweather.className} my-5 w-fit mx-auto px-2 py-1 relative min-h-24`}
                 >
                     {quote && quote.q && (
-                        <div className="flex flex-col w-fit mx-auto items-center text-custom-color-5">
+                        <div className="flex flex-col w-fit mx-auto items-center">
                             <RiDoubleQuotesL
                                 className="absolute left-0 bottom-[50%] transform translate-y-1/2 text-custom-static-2 opacity-25"
                                 size={150}
@@ -91,9 +76,7 @@ const Users = () => {
                             />
                         </div>
                     )}
-                    <p
-                        className={`font-thin w-fit mx-auto mt-2 italic text-custom-color-5`}
-                    >
+                    <p className={`font-thin w-fit mx-auto mt-2 italic`}>
                         {quote && quote.q ? `- ${quote.a} -` : null}
                     </p>
                 </div>
@@ -104,7 +87,12 @@ const Users = () => {
                         value={query}
                         onChange={handleChange}
                         placeholder="Search for books"
-                        className="w-full p-2 placeholder:text-custom-color-5/50 bg-transparent"
+                        className="w-full p-2 bg-transparent"
+                        onKeyUp={(e) => {
+                            if (e.key === "Enter") {
+                                debouncedHandleSearch();
+                            }
+                        }}
                     />
 
                     <button
@@ -118,7 +106,7 @@ const Users = () => {
 
                 {error && <p style={{ color: "red" }}>{error}</p>}
                 <div className="w-full">
-                    {/* {books.map((book) => {
+                    {books.map((book) => {
                         const imageSrc =
                             book.volumeInfo.imageLinks?.thumbnail ||
                             book.volumeInfo.imageLinks?.smallThumbnail;
@@ -126,6 +114,7 @@ const Users = () => {
                         return (
                             <BookCard
                                 key={book.id}
+                                id={book.id}
                                 title={book.volumeInfo.title}
                                 subtitle={book.volumeInfo.subtitle}
                                 authors={book.volumeInfo.authors}
@@ -135,10 +124,10 @@ const Users = () => {
                                 image={imageSrc || ""}
                             />
                         );
-                    })} */}
+                    })}
 
                     {/* example booCard */}
-                    {/* <BookCard
+                    <BookCard
                         title="The Lord of the Rings"
                         subtitle="The Fellowship of the Ring"
                         authors={["J.R.R. Tolkien"]}
@@ -146,11 +135,11 @@ const Users = () => {
                         publishedDate="1954"
                         pageCount={700}
                         image="https://images.unsplash.com/photo-1606813907291-d86efa9b94db?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
-                    /> */}
+                    />
                 </div>
             </div>
         </>
     );
 };
 
-export default Users;
+export default Home;

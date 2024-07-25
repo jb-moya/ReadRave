@@ -4,8 +4,12 @@ import { merriweather } from "@/fonts";
 import { BsStarFill } from "react-icons/bs";
 import formatNumber from "@/app/util/numFormat";
 import BookStatusButton from "./BookStatusButton";
+import BookImageContainer from "./BookImageContainer";
+import Link from "next/link";
+import BookAuthors from "./BookAuthors";
 
 interface BookCardProps {
+    id?: string;
     title: string;
     subtitle?: string;
     authors?: string[];
@@ -16,6 +20,7 @@ interface BookCardProps {
 }
 
 export default function BookCard({
+    id,
     title,
     subtitle,
     authors,
@@ -28,33 +33,21 @@ export default function BookCard({
     const randomRatingCount = Math.floor(Math.random() * 20_000);
 
     return (
-        <div className="group w-full flex gap-1 mt-4 text-custom-color-5">
-            <div className="flex border-b border-custom-color-5/10 items-start max-w-[120px] min-w-[120px] min-h-[180px] sm:min-w-[120px] sm:min-h-[180px] relative group hover:scale-105 transition-transform duration-500 ease-elegant cursor-pointer">
-                {image ? (
-                    <Image
-                        src={image}
-                        alt="book"
-                        className="object-contain object-top  w-full shadow-2xl "
-                        width="0"
-                        height="0"
-                        sizes="100vw"
-                    />
-                ) : (
-                    <div className="truncate relative w-full h-full flex flex-col items-center justify-center border border-custom-color-4">
-                        <p className="text-xs mt-2 absolute top-0 opacity-75">
-                            no image
-                        </p>
-                        <p className="truncate text-wrap overflow-hidden">
-                            {title}
-                        </p>
-                    </div>
-                )}
-            </div>
-            <div className="mx-2 mt-2 w-full flex flex-col">
+        <div className="group w-full flex gap-1 mt-4 border-b border-custom-color-5/10 px-4">
+            <BookImageContainer
+                title={title}
+                image={image || ""}
+                imageContainerClassName="w-[120px] h-[180px] sm:w-[120px] sm:h-[180px]"
+            />
+
+            <div className="min-h-[200px] mx-2 mt-2 w-full flex flex-col">
                 <div
-                    className={`${merriweather.className} border-b-[1px] border-custom-color-5 border-opacity-10 cursor-pointer line-clamp-2`}
+                    className={`${merriweather.className} w-full cursor-pointer line-clamp-3`}
                 >
-                    <div className="group-hover:text-custom-static-2 text-xl">
+                    <Link
+                        href={`/book/${id}`}
+                        className="group-hover:text-custom-static-2 text-xl"
+                    >
                         <span>{title}</span>
                         {subtitle && (
                             <>
@@ -63,29 +56,28 @@ export default function BookCard({
                                 </span>
                             </>
                         )}
-                    </div>
-                    <div className="text-sm line-clamp-1 mt-1 text-custom-static-2">
-                        <span className="text-custom-color-5">by </span>
-                        {authors?.map((author, index) => (
-                            <div key={author}>
-                                <span>{author}</span>
-                                <span>
-                                    {index < authors.length - 1 && " • "}
-                                </span>
-                            </div>
-                        ))}
-                    </div>
+                    </Link>
+                </div>
+
+                {/* <span>{authors}</span> */}
+                <div className="text-sm flex justify-start mt-1 w-full">
+                    <BookAuthors authors={authors || []} />
                 </div>
 
                 <div className="flex text-sm mt-1 line-clamp-1">
-                    {categories?.map((category) => (
-                        <span key={category} className=" opacity-80">
-                            {category}
-                        </span>
+                    {categories?.map((category, index) => (
+                        <>
+                            <span key={category} className=" opacity-80">
+                                {category}
+                            </span>
+                            <span className="opacity-35 mr-1">
+                                {index < categories.length - 1 && " • "}
+                            </span>
+                        </>
                     ))}
+                    
                     {publishedDate && (
                         <>
-                            <span className="opacity-35 mx-1"> • </span>
                             <span className=" opacity-80">
                                 {new Date(publishedDate).getFullYear()}
                             </span>
@@ -114,7 +106,7 @@ export default function BookCard({
                     </div>
                 </div>
 
-                <div className="flex h-auto flex-row text-center items-end justify-end flex-1">
+                <div className="flex h-auto flex-row text-center items-end justify-end flex-1 mb-2">
                     <BookStatusButton />
                 </div>
             </div>
