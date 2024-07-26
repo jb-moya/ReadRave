@@ -48,6 +48,7 @@ export default function Page({
 
     useEffect(() => {
         const getBookInfo = async () => {
+            setLoading(true);
             const data = await fetchBookInfo(id);
             setBook(data);
             setLoading(false);
@@ -64,7 +65,6 @@ export default function Page({
 
         const char = "/";
 
-        // Split categories by char
         (book?.volumeInfo.categories || []).forEach((category) => {
             const index = category.indexOf(char);
 
@@ -75,7 +75,6 @@ export default function Page({
             }
         });
 
-        // Split genres by char
         (book?.volumeInfo.categories || []).forEach((genre) => {
             const index = genre.indexOf(char);
 
@@ -90,7 +89,12 @@ export default function Page({
         // console.log("Categories:", categories);
         // console.log("Genres:", genres);
 
-        setCategories(categories);
+        // remove duplicates from categories
+        const uniqueCategories = categories.filter(
+            (category, index) => categories.indexOf(category) === index
+        );
+
+        setCategories(uniqueCategories);
         setGenres(genres);
     }, [book]);
 
@@ -109,23 +113,24 @@ export default function Page({
                         book?.volumeInfo.imageLinks?.smallThumbnail ??
                         ""
                     }
-                    imageContainerClassName="mx-auto max-w-[300px] min-w-[300px] min-h-[450px] sm:min-w-[300px] sm:min-h-[450px]"
+                    loading={loading}
+                    imageContainerClassName="mx-auto max-w-[300px] min-w-[300px] h-[450px] sm:min-w-[300px] sm:h-[450px]"
                 />
             </div>
-            <div className="mt-10 text-center">
+            <div className="mt-5 sm:mt-10 text-center ">
                 <p
                     className={clsx(
-                        "text-3xl font-bold text-custom-static-2",
+                        "text-2xl sm:text-3xl font-bold text-custom-static-2",
                         merriweather.className
                     )}
                 >
-                    {book?.volumeInfo.title}
+                    {book?.volumeInfo.title || '\u00A0'}
                 </p>
-                <p className="text-2xl font-light text-custom-color-5/50">
-                    {book?.volumeInfo.subtitle}
+                <p className="text-lg sm:text-2xl font-light text-custom-color-5/50">
+                    {book?.volumeInfo.subtitle || '\u00A0'}
                 </p>
             </div>
-            <div className="text-2xl my-2 w-full justify-center flex">
+            <div className="text-2xl my-2 w-full justify-center flex flex-wrap">
                 <BookAuthors authors={book?.volumeInfo.authors || []} />
             </div>
             <div className="mt-5 sm:flex block items-center">
@@ -149,7 +154,7 @@ export default function Page({
                     )}
                 </div>
             </div>
-            <div className="mt-5 w-full min-h-28">
+            <div className="mt-5 w-full min-h-[240px]">
                 {book?.volumeInfo.description && (
                     <>
                         <div className="relative">
@@ -173,7 +178,7 @@ export default function Page({
                                 setShowDescriptionMore(!showDescriptionMore)
                             }
                         >
-                            Read more <BiChevronDown />{" "}
+                            {showDescriptionMore ? "Show Less" : "Show More"} <BiChevronDown />{" "}
                         </Button>
                     </>
                 )}

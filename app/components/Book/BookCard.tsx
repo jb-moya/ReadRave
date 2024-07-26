@@ -59,7 +59,6 @@ export default function BookCard({
                     </Link>
                 </div>
 
-                {/* <span>{authors}</span> */}
                 <div className="text-sm flex justify-start mt-1 w-full">
                     <BookAuthors authors={authors || []} />
                 </div>

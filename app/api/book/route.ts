@@ -7,6 +7,7 @@ export async function GET(request: Request) {
         const url = new URL(request.url);
         const query = url.searchParams.get("query");
         const bookId = url.searchParams.get("bookId");
+        const maxResults = url.searchParams.get("maxResults") || null;
 
         console.log("URL", url);
 
@@ -28,6 +29,7 @@ export async function GET(request: Request) {
                     params: {
                         q: query,
                         key: process.env.GOOGLE_BOOKS_API_KEY,
+                        maxResults: maxResults,
                     },
                 }
             );

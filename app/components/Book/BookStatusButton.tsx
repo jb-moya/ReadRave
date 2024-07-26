@@ -10,7 +10,7 @@ import {
 
 const BookStatusButton = () => {
   return (
-      <div className="dropdown dropdown-hover  dropdown-end rounded-none">
+      <div className="dropdown dropdown-hover dropdown-end rounded-none">
           <div
               tabIndex={0}
               role="button"
@@ -18,6 +18,7 @@ const BookStatusButton = () => {
           >
               <BsBookmarkPlus /> Want to Read
           </div>
+          
           <ul
               tabIndex={0}
               className="dropdown-content menu"

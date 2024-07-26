@@ -2,31 +2,37 @@
 import React from "react";
 import Image from "next/image";
 import clsx from "clsx";
+import { toBase64, shimmer } from "@/app/util/shimmer";
 
 const BookImageContainer = ({
     title,
     image,
     imageContainerClassName,
+    loading = false,
 }: {
     title: string;
     image: string;
     imageContainerClassName?: string;
+    loading?: boolean;
 }) => {
     return (
         <div
             className={clsx(
-                `flex items-start max-w-[120px] min-w-[120px] min-h-[180px] sm:min-w-[120px] sm:min-h-[180px] relative group hover:scale-105 transition-transform duration-500 ease-elegant cursor-pointer`,
+                `flex items-start max-w-[120px] min-w-[120px] sm:min-w-[120px] relative group transition-transform duration-500 ease-elegant`,
                 imageContainerClassName
             )}
         >
-            {image ? (
+            {image && !loading ? (
                 <Image
                     src={image || ""}
                     alt="book"
-                    className="object-contain object-top  w-full shadow-2xl "
-                    width="0"
-                    height="0"
-                    sizes="100vw"
+                    className="object-contain object-top w-full"
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    priority
+                    placeholder={`data:image/svg+xml;base64,${toBase64(
+                        shimmer(10, 10)
+                    )}`}
                 />
             ) : (
                 <div className="truncate relative w-full h-full flex flex-col items-center justify-center border border-custom-color-4">
